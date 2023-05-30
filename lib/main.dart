@@ -1,7 +1,11 @@
+// ignore_for_file: constant_identifier_names, duplicate_ignore
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+// ignore: duplicate_ignore
 enum TaskStatus {
+  // ignore: constant_identifier_names
   Pending,
   Ignored,
 }
@@ -21,16 +25,18 @@ class Task {
 }
 
 class TodoListScreen extends StatefulWidget {
+  const TodoListScreen({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _TodoListScreenState createState() => _TodoListScreenState();
 }
 
 class _TodoListScreenState extends State<TodoListScreen> {
-  List<Task> _todoItems = [];
-  TextEditingController _textController = TextEditingController();
+  final List<Task> _todoItems = [];
+  final TextEditingController _textController = TextEditingController();
   DateTime? _selectedDate;
   TimeOfDay? _selectedTime;
-  ThemeData _themeData = ThemeData.light();
   ThemeMode _themeMode = ThemeMode.system;
 
   void _toggleTheme(ThemeMode mode) {
@@ -47,35 +53,35 @@ class _TodoListScreenState extends State<TodoListScreen> {
       darkTheme: ThemeData.dark(),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Todo List'),
+          title: const Text('Todo List'),
           actions: [
             IconButton(
-              icon: Icon(Icons.settings),
+              icon: const Icon(Icons.settings),
               onPressed: () {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: Text('Settings'),
+                      title: const Text('Settings'),
                       content: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           ListTile(
-                            title: Text('System Default'),
+                            title: const Text('System Default'),
                             onTap: () {
                               _toggleTheme(ThemeMode.system);
                               Navigator.pop(context);
                             },
                           ),
                           ListTile(
-                            title: Text('Light Mode'),
+                            title: const Text('Light Mode'),
                             onTap: () {
                               _toggleTheme(ThemeMode.light);
                               Navigator.pop(context);
                             },
                           ),
                           ListTile(
-                            title: Text('Dark Mode'),
+                            title: const Text('Dark Mode'),
                             onTap: () {
                               _toggleTheme(ThemeMode.dark);
                               Navigator.pop(context);
@@ -105,25 +111,25 @@ class _TodoListScreenState extends State<TodoListScreen> {
               Expanded(
                 child: TextField(
                   controller: _textController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Enter a task',
                   ),
                 ),
               ),
               IconButton(
-                icon: Icon(Icons.calendar_today),
+                icon: const Icon(Icons.calendar_today),
                 onPressed: () {
                   _showDatePicker(context);
                 },
               ),
               IconButton(
-                icon: Icon(Icons.access_time),
+                icon: const Icon(Icons.access_time),
                 onPressed: () {
                   _showTimePicker(context);
                 },
               ),
               IconButton(
-                icon: Icon(Icons.add),
+                icon: const Icon(Icons.add),
                 onPressed: () {
                   final newTitle = _textController.text;
                   if (newTitle.isNotEmpty) {
@@ -164,20 +170,20 @@ class _TodoListScreenState extends State<TodoListScreen> {
                       ),
                     ),
                     if (task.deadline != null) ...[
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Text(
                         'Deadline: ${DateFormat('MMM d, y').format(task.deadline!)} ${DateFormat.jm().format(task.deadline!)}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12,
                           color: Colors.grey,
                         ),
                       ),
                     ],
                     if (task.remainingTime != null) ...[
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Text(
                         'Remaining: ${task.remainingTime}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 12,
                           color: Colors.grey,
                         ),
@@ -187,7 +193,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
                 ),
                 trailing: CircleAvatar(
                   child: IconButton(
-                    icon: Icon(Icons.delete),
+                    icon: const Icon(Icons.delete),
                     onPressed: () {
                       _removeTodoItem(index);
                     },
@@ -272,19 +278,23 @@ class _TodoListScreenState extends State<TodoListScreen> {
 }
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false, // Hide the debug banner
+      debugShowMaterialGrid: false,
       title: 'Todo List',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: TodoListScreen(),
+      home: const TodoListScreen(),
     );
   }
 }
