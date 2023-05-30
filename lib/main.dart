@@ -48,6 +48,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       themeMode: _themeMode,
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
@@ -287,8 +288,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false, // Hide the debug banner
-      debugShowMaterialGrid: false,
+      debugShowCheckedModeBanner: false,
       title: 'Todo List',
       theme: ThemeData(
         primarySwatch: Colors.blue,
